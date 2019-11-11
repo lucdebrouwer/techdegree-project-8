@@ -1,26 +1,62 @@
 const express = require("express");
-const router = express.router();
+const router = express.Router();
+const db = require("../db");
+const { Book } = db.models;
 
-/* For each route that handles database interactions I am writing asynchronous functions with async/await,
-that serve as callback whenever an user interacts with the application, so we keep our code organized and logic seperated */
+/* Import the async handler middleware function to handle our async functions*/
+const asyncHandler = require("../asyncHandler");
 
-// Retrieve all books from our library database
-// Retrieve a new book
-// Create a new book for our library database
-// Get one specific book from our library database
-// Update a specific book from our library database
-// Remove a specific book from our library database
+/* For each route that handles database interactions, I've wrapped them in an asyncHandler
+By doing so, we seperate our logic and it keeps the code organized and easier to maintain */
 
-router.get("/books", () => {});
+router.get(
+  "/books",
+  asyncHandler(async (req, res, next) => {
+    // Retrieve all books from our library database
+    const books = await Book.findAll();
+    res.render("index", { books });
+  })
+);
 
-router.get("/books/new", () => {});
+router.get(
+  "/books/new",
+  asyncHandler(async (req, res, next) => {
+    // Render the new book form view
+    res.render("new-book");
+  })
+);
 
-router.post("/books/new", () => {});
+router.post(
+  "/books/new",
+  asyncHandler(async (req, res, next) => {
+    // Create a new book for our library database
+    // Redirect the user back to the newly created book
+  })
+);
 
-router.get("/books/:id", () => {});
+router.get(
+  "/books/:id",
+  asyncHandler(async (req, res, next) => {
+    // Retrieve the book details of the book that needs to be updated
+    // Render the update-book view
+    const book = await Book.findByPk(req.params.id);
+    res.send({ book });
+  })
+);
 
-router.post("/books/:id", () => {});
+router.post(
+  "/books/:id",
+  asyncHandler(async (req, res, next) => {
+    // Update the book details from the requested book
+    // Redirect the user back to the books
+  })
+);
 
-router.post("/books/:id/delete");
+router.post(
+  "/books/:id/delete",
+  asyncHandler(async (req, res, next) => {
+    // Delete the requested book
+  })
+);
 
 module.exports = router;

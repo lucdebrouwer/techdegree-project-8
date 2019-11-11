@@ -21,4 +21,8 @@ npm start
 
 ### Future Improvements
 
+- Pagination
+- Authentication
+- Search
+
 ### Reflection
