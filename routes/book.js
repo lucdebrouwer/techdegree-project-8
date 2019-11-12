@@ -1,5 +1,8 @@
 const express = require("express");
 const router = express.Router();
+const bodyParser = require("body-parser");
+router.use(bodyParser.json()); // support json encoded bodies
+router.use(bodyParser.urlencoded({ extended: false })); // support encoded bodies
 const db = require("../db");
 const { Book } = db.models;
 
@@ -29,6 +32,8 @@ router.get(
 router.post(
   "/books/new",
   asyncHandler(async (req, res, next) => {
+    res.send({ message: req.body });
+    console.log(req.body);
     // Create a new book for our library database
     // Redirect the user back to the newly created book
   })
