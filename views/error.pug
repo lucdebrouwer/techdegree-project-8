@@ -1,0 +1,12 @@
+extends layout.pug
+block content
+ if error
+  h1 #{error.message} 
+  h2 #{error.status}
+  p #{error.description}
+  a(href="/") Go back
+ else
+  h1 Server Error
+  h2 500
+  p Something went wrong with the server, we're doing our best to solve the issue 
+  

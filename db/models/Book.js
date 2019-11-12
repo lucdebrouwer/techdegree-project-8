@@ -11,10 +11,20 @@ module.exports = sequelize => {
         autoIncrement: true
       },
       title: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        validate: {
+          notEmpty: {
+            msg: "Title field can not be empty"
+          }
+        }
       },
       author: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        validate: {
+          notEmpty: {
+            msg: "Author field can not be empty"
+          }
+        }
       },
       genre: {
         type: Sequelize.STRING

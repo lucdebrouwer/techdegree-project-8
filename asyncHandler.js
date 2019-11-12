@@ -7,8 +7,8 @@ module.exports = function asyncHandler(cb) {
   return async (req, res, next) => {
     try {
       await cb(req, res, next);
-    } catch (error) {
-      res.status(400).send(error);
+    } catch (err) {
+      next(err);
     }
   };
 };

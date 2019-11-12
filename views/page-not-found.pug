@@ -1,0 +1,10 @@
+extends layout.pug
+block content
+ div(class="grid-container")
+  h1(class="item1") #{error.message}
+  h2(class="item2") #{error.status} 
+   p #{error.description} 
+   img(src="/static/images/book_icon2.png" alt="book" class="item3")
+    
+    
+ a(href="/") Go back

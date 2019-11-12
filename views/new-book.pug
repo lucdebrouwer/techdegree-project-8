@@ -1,6 +1,10 @@
 extends layout.pug
 
 block content
+ if error
+  ul
+   each err in error
+    li #{err.message}
  h1 New Book
  form(action="/books/new" method="post")
   p
