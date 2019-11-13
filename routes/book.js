@@ -162,6 +162,7 @@ router.post(
   asyncHandler(async (req, res, next) => {
     // Retrieve requested book
     const book = await Book.findByPk(req.params.id);
+    console.log(req.body);
     if (book) {
       // Delete the requested book
       await book.destroy();
