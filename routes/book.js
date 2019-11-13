@@ -4,7 +4,7 @@ const router = express.Router();
 
 /* Middleware Setup */
 // Import the async handler middleware function to handle our async functions
-const asyncHandler = require("../asyncHandler");
+const asyncHandler = require("../lib/asyncHandler");
 const searchHandler = require("../lib/searchHandler");
 const bodyParser = require("body-parser");
 
@@ -16,24 +16,12 @@ router.use(bodyParser.urlencoded({ extended: false }));
 const db = require("../db");
 const { Book } = db.models;
 
-// const paginate = (page, pageSize) => {
-//   const offset = page * pageSize;
-//   const limit = offset + pageSize;
-// }
-
-// const paginateHandler = (req, res, next) => {
-//   paginate(req.params.page, 10)
-// }
 /* For each route that handles database interactions, I've wrapped them in an asyncHandler
 By doing so, we seperate our logic and it keeps the code organized and easier to maintain */
 
 router.get(
   "/books",
   asyncHandler(async (req, res, next) => {
-    // Future TODO:
-    // Refactor the code below into a seperate pagination handler
-    // I already tried refactoring this the first time, but it went entirely wrong with the variables
-    // Specify our options, by default we only want to display 10 rows and use no offset.
     let options = {
       order: [["title", "asc"]],
       limit: 10,
@@ -131,6 +119,7 @@ router.get(
     const errors = {};
     const book = await Book.findByPk(req.params.id);
     if (!book) {
+      // Pass a custom error to the error handler
       const err = new Error("Book Not Found!");
       err.description =
         "The book you were trying to access, was not found. Please try another book";

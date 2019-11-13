@@ -9,7 +9,7 @@ const sequelize = db.sequelize;
 const bookRoutes = require("./routes/book");
 
 /* Use an async handler middleware function to handle our async functions*/
-const asyncHandler = require("./asyncHandler");
+const asyncHandler = require("./lib/asyncHandler");
 /* Middleware setup */
 app.use("/static", express.static(path.join(__dirname, "public")));
 app.set("view engine", "pug");

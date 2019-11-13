@@ -3,10 +3,26 @@ body {
   font: 18px "Garamond", serif;
 }
 
+/* custom applied css */
+/* To either override bootstrap styles, or the default styling */
+
 form input[type="submit"].custom-btn {
   margin-top: 0px;
   background: #019875;
 }
+/* Default button styling, refers to the old styling */
+.custom-btn {
+  border: none;
+  margin-top: 10px;
+  color: white;
+  background: #019875;
+  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding: 10px 14px 12px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+/* Back button styling */
 .custom-btn-back {
   margin-left: 10px;
   margin-top: 20px !important;
@@ -19,17 +35,8 @@ form input[type="submit"].custom-btn {
   border-radius: 5px;
   cursor: pointer;
 }
-.custom-btn {
-  border: none;
-  margin-top: 10px;
-  color: white;
-  background: #019875;
-  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
-  padding: 10px 14px 12px;
-  font-size: 14px;
-  border-radius: 5px;
-  cursor: pointer;
-}
+
+/* Create button styling, with specific selecting and overriding */
 form input[type="submit"].custom-btn-create {
   border: none;
   margin-left: 5px !important;
@@ -84,6 +91,8 @@ form input[type="submit"].custom-btn-create {
 .custom-btn:hover {
   background-color: #01b189;
 }
+/* form styles */
+/* Override input styles, default back to original styles */
 .form-group .custom-inp {
   width: 300px !important;
 }
@@ -121,19 +130,66 @@ input[type="submit"] {
   cursor: pointer;
 }
 
-/* .custom button {
-  margin-top: 30px;
-  color: white;
-  background: #019875;
-  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
-  padding: 10px 14px 12px;
-  font-size: 14px;
+.table th {
+  border-bottom: 2px solid #d8b493 !important;
+}
+
+/* Styling for Error messages and pages */
+.error {
+  color: rgb(236, 15, 15);
+}
+.grid-container {
+  display: grid;
+  width: 100%;
+}
+.item1 {
+  grid-row-start: 1;
+  grid-row-end: 1;
+}
+
+.item2 {
+  grid-row-start: 2;
+  grid-column-start: 1;
+}
+
+.item3 {
+  float: left;
+  grid-row-start: 3;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  margin: 0px;
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+}
+
+/* pagination styling */
+.pagination {
+  margin: 40px 0 0 0;
+  text-align: left;
+}
+
+.pagination li {
+  display: inline;
+}
+
+.pagination li a {
+  border: 1px solid #eaeaea;
   border-radius: 5px;
-  cursor: pointer;
-} */
+  padding: 3px 8px;
+  text-decoration: none;
+  color: #4ba6c3;
+}
+
+.pagination li a.active,
+.pagination li a:hover {
+  background-color: #01b189;
+  color: #fff;
+}
+
+/* Old styling */
 
 /*
-
 form a.button,
 input[type="submit"] {
   margin-left: 140px;
@@ -165,12 +221,6 @@ h2 {
   border-top: 2px solid #e7e7e7;
   padding-top: 20px;
 }
-
-*/
-.table th {
-  border-bottom: 2px solid #d8b493 !important;
-}
-
 /* tr {
   min-height: 50px;
 } */
@@ -204,53 +254,3 @@ input[type="text"] {
   width: 300px;
 }
 */
-.error {
-  color: rgb(236, 15, 15);
-}
-.grid-container {
-  display: grid;
-  width: 100%;
-}
-.item1 {
-  grid-row-start: 1;
-  grid-row-end: 1;
-}
-
-.item2 {
-  grid-row-start: 2;
-  grid-column-start: 1;
-}
-
-.item3 {
-  float: left;
-  grid-row-start: 3;
-  grid-column-start: 1;
-  grid-column-end: 3;
-  margin: 0px;
-  width: 75px;
-  height: 75px;
-  border-radius: 50%;
-}
-
-.pagination {
-  margin: 40px 0 0 0;
-  text-align: left;
-}
-
-.pagination li {
-  display: inline;
-}
-
-.pagination li a {
-  border: 1px solid #eaeaea;
-  border-radius: 5px;
-  padding: 3px 8px;
-  text-decoration: none;
-  color: #4ba6c3;
-}
-
-.pagination li a.active,
-.pagination li a:hover {
-  background-color: #01b189;
-  color: #fff;
-}
