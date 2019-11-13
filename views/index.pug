@@ -33,13 +33,13 @@ block content
    p= "Total books: " + totalBooks
    div(class="row")
    ul(class="pagination col-sm-4")
-    - var n = 1;
-     while n <= pages
+    - var num = 1;
+     while num <= pages
       li
-       if(current == n)
-        a(class="active" href="/books/?page=" + n)= n++
+       if(current == num)
+        a(class="active" href="/books/?page=" + num)= num++
        else
-        a(href="/books/?page=" + n)= n++ 
+        a(href="/books/?page=" + num)= num++ 
    if search
     div(class="row")
      a(class="custom-btn-back" href="/books") Go Back
