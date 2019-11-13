@@ -30,7 +30,12 @@ module.exports = sequelize => {
         type: Sequelize.STRING
       },
       year: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        validate: {
+          isNumeric: {
+            msg: "Year field only accepts numbers, not strings"
+          }
+        }
       }
     },
     { sequelize }
