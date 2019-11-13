@@ -6,7 +6,7 @@ block content
     li #{err.message}
   else
   h1 Update Book
-  form(action="" method="post")
+  form(action=`books/${book.id}` method="post")
    div(class="form-group row")
     label(for="title" class="col-sm-1 col-form-label") Title
     div(class="col-sm-11")
@@ -15,20 +15,20 @@ block content
     label(for="author" class="col-sm-1 col-form-label") Author
     div(class="col-sm-11")
      input(name="author" type="text" id="author" value=`${book.author}` class="form-control custom-inp")
-  div(class="form-group row")
+   div(class="form-group row")
     label(for="genre" class="col-sm-1 col-form-label") Genre
     div(class="col-sm-11")
      input(name="genre" type="text"  id="genre" value=`${book.genre}` class="form-control custom-inp")
-  div(class="form-group row")
+   div(class="form-group row")
     label(for="year" class="col-sm-1 col-form-label") Year
     div(class="col-sm-11")
      input(name="year" type="text"  id="year" value=`${book.year}` class="form-control custom-inp")
-  div(class="form-group row")
-   input(type="submit" value="Update Book" class="col-sm-3 custom-btn-update")
-  form(method="post" action=`books/${book.id}/delete`)
    div(class="form-group row")
-     button(action="/books" class="col-sm-3 custom-btn-cancel") Cancel
-   div(class="form-group row") 
-    input(type="submit" value="Delete Book" class="col-sm-3 custom-btn-destroy") 
+     input(type="submit" value="Update Book" class="col-sm-3 custom-btn-update")
+   form(method="post" action=`books/${book.id}/delete`)
+    div(class="form-group row")
+     a(href="/books" class="col-sm-3 custom-btn-cancel") Cancel
+    div(class="form-group row")
+     input(type="submit" value="Delete Book" class="col-sm-3 custom-btn-destroy") 
 
        
