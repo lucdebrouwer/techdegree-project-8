@@ -142,7 +142,6 @@ router.post(
       // Find the requested book
       book = await Book.findByPk(req.params.id);
       // If book exists, update the record
-      console.log(req.body);
       if (book) {
         await book.update(req.body);
         // Redirect the user back to the books
@@ -151,7 +150,6 @@ router.post(
         res.sendStatus(404);
       }
     } catch (error) {
-      console.error(error);
       book = await Book.build(req.body);
       book.id = req.params.id;
       res.render("update-book", { book, error: error.errors });
