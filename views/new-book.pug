@@ -2,24 +2,29 @@ extends layout.pug
 
 block content
  if error
+  h2(class="error") Something went wrong, please adjust your submission
   ul
    each err in error
     li #{err.message}
  h1 New Book
  form(action="/books/new" method="post")
-  p
-   label(for="title") Title
-   input(name="title" type="text" id="title")
-  p
-   label(for="author") Author
-   input(name="author" type="text" id="author")
-  p
-   label(for="genre") Genre
-   input(name="genre" type="text" id="genre")
-  p
-   label(for="year") Year
-   input(name="year" type="text" id="year")
-  p
-   input(type="submit" value="Create New Book")
-  p
-   a(class="button" href="/books") Cancel  
+  div(class="form-group row")
+   label(for="title" class="col-sm-1 col-form-label") Title
+   div(class="col-sm-11")
+    input(name="title" type="text" id="title" class="form-control custom-inp")
+  div(class="form-group row")
+   label(for="author" class="col-sm-1 col-form-label") Author
+   div(class="col-sm-11")
+    input(name="author" type="text" id="author" class="form-control custom-inp")
+  div(class="form-group row")
+   label(for="genre" class="col-sm-1 col-form-label") Genre
+   div(class="col-sm-11")
+    input(name="genre" type="text" id="genre"  class="form-control custom-inp")
+  div(class="form-group row")
+   label(for="year" class="col-sm-1 col-form-label") Year
+   div(class="col-sm-11")
+    input(name="year" type="text" id="year" class="form-control custom-inp")
+  div(class="form-group row")
+   input(type="submit" value="Create New Book" class="col-sm-3 custom-btn-create")
+ div(class="form-group row")
+  a(class="col-sm-3 custom-btn-cancel" href="/books") Cancel  

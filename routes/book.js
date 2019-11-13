@@ -33,7 +33,6 @@ router.get(
     // Future TODO:
     // Refactor the code below into a seperate pagination handler
     // I already tried refactoring this the first time, but it went entirely wrong with the variables
-
     // Specify our options, by default we only want to display 10 rows and use no offset.
     let options = {
       order: [["title", "asc"]],
@@ -75,8 +74,7 @@ router.get(
   asyncHandler(async (req, res, next) => {
     const query = req.params.query;
     try {
-      const books = await searchHandler(query);
-      res.render("index", { books, search: true });
+      await searchHandler(req, res, next, query); // pass middleware options to handler to access params and to pass errors to next();
     } catch (error) {
       next(error);
     }
@@ -88,8 +86,10 @@ router.post(
     const query = req.body;
     console.log(query);
     try {
-      const books = await searchHandler(query);
-      res.render("index", { books, search: true });
+      const books = await searchHandler(req, res, next, query.search); // pass middleware options to handler to access params and to pass errors to next();
+      if (books > 0) {
+        res.render("index", { books, search: true });
+      }
     } catch (error) {
       next(error);
     }
