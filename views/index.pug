@@ -1,6 +1,12 @@
 extends layout.pug
 
 block content
+ form(action="/books/search" method="post")
+  p
+   label(for="search")
+   input(name="search" type="text" id="search" placeholder="Search through Library")
+  p
+   input(type="submit" value="Search!")
  h1 Books
  p
   a(class="button" href="/books/new") Create New Book
@@ -19,3 +25,14 @@ block content
     td #{book.author}
     td #{book.genre}
     td #{book.year}
+ p= "Total books: " + totalBooks
+ ul(class="pagination")
+  - var n = 1;
+   while n <= pages
+    li
+     if(current == n)
+      a(class="active" href="/books/?page=" + n)= n++
+     else
+      a(href="/books/?page=" + n)= n++ 
+ if search
+  a(href="/") Go Back

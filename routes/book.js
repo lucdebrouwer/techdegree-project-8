@@ -5,6 +5,7 @@ const router = express.Router();
 /* Middleware Setup */
 // Import the async handler middleware function to handle our async functions
 const asyncHandler = require("../asyncHandler");
+const searchHandler = require("../lib/searchHandler");
 const bodyParser = require("body-parser");
 
 // support json encoded bodies
@@ -15,15 +16,83 @@ router.use(bodyParser.urlencoded({ extended: false }));
 const db = require("../db");
 const { Book } = db.models;
 
+// const paginate = (page, pageSize) => {
+//   const offset = page * pageSize;
+//   const limit = offset + pageSize;
+// }
+
+// const paginateHandler = (req, res, next) => {
+//   paginate(req.params.page, 10)
+// }
 /* For each route that handles database interactions, I've wrapped them in an asyncHandler
 By doing so, we seperate our logic and it keeps the code organized and easier to maintain */
 
 router.get(
   "/books",
   asyncHandler(async (req, res, next) => {
-    // Retrieve all books from our library database
-    const books = await Book.findAll();
-    res.render("index", { books });
+    // Future TODO:
+    // Refactor the code below into a seperate pagination handler
+    // I already tried refactoring this the first time, but it went entirely wrong with the variables
+
+    // Specify our options, by default we only want to display 10 rows and use no offset.
+    let options = {
+      order: [["title", "asc"]],
+      limit: 10,
+      offset: 0
+    };
+
+    // This piece of code will look up whether the user clicked on the pagination link
+    // If the user clicked on the pagination link, calculate the offset.
+    if (req.query.page) {
+      (options.limit = 10),
+        (options.offset = (req.query.page - 1) * options.limit);
+    }
+    // We want to find all books and count them so we can create our pages to paginate
+    await Book.findAndCountAll(options)
+      .then(books => {
+        let totalBooks = books.count; // store bookcount
+        let perPage = 10;
+        let pages = Math.ceil(totalBooks / perPage); // count pages
+        let current = req.query.page ? req.query.page : 1; // Set current page, by default the page is 1
+
+        // Render our paginated book list
+        res.render("index", {
+          books: books.rows,
+          totalBooks,
+          perPage,
+          pages,
+          current
+        });
+      })
+      .catch(err => {
+        next(err); // Pass any errors to our error middlware
+      });
+  })
+);
+
+router.get(
+  "/books/search/:query",
+  asyncHandler(async (req, res, next) => {
+    const query = req.params.query;
+    try {
+      const books = await searchHandler(query);
+      res.render("index", { books, search: true });
+    } catch (error) {
+      next(error);
+    }
+  })
+);
+router.post(
+  "/books/search",
+  asyncHandler(async (req, res, next) => {
+    const query = req.body;
+    console.log(query);
+    try {
+      const books = await searchHandler(query);
+      res.render("index", { books, search: true });
+    } catch (error) {
+      next(error);
+    }
   })
 );
 
